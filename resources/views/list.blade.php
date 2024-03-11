@@ -51,7 +51,12 @@
             <td>{{ $product->price }}</td>
             <td>{{ $product->stock }}</td>
             <td><a href="{{ route('show',['id'=>$product->id]) }}" class="btn btn-primary">詳細</a></td>
-            <td><button type="submit" class="btn btn-primary">削除</button></td>
+            <td>
+                <form action="{{ route('destroy', ['id'=>$product->id]) }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-danger">削除</button>
+                </form>
+            </td>        
         </tr>
     @endforeach
     </tbody>

@@ -77,14 +77,16 @@ class ProductController extends Controller
         ->with('success', 'Product updated successfully');
         // ビュー画面にメッセージを代入した変数(success)を送ります
     }
-    public function destroy(Product $product)
+    public function destroy($id)
     //(Product $product) 指定されたIDで商品をデータベースから自動的に検索し、その結果を $product に割り当てます。
     {
-        // 商品を削除します。
+        // Booksテーブルから指定のIDのレコード1件を取得
+        $product = Product::find($id);
+        // レコードを削除
         $product->delete();
     
         // 全ての処理が終わったら、商品一覧画面に戻ります。
-        return redirect('/products');
+        return redirect('list');
         //URLの/productsを検索します
         //products　/がなくても検索できます
     }
