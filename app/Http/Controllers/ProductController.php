@@ -19,7 +19,7 @@ class ProductController extends Controller
         $companies = $companyModel->getCompanies();
         return view('list', ['products' => $products,'companies' => $companies]);
         }
-        public function showCreate(){
+        public function showCreate(Product $product){
         // インスタンス生成
         $productModel = new Product();
         $products = $productModel->getProducts();
@@ -45,10 +45,10 @@ class ProductController extends Controller
         $productFind = Product::find($id);
         return view('edit', compact('productFind'));
         }
-        public function store(Request $request, Product $product)
+        public function store(Request $request,Product $product)
         {
         $registProductModel = new Product();
-        $registproducts = $registProductModel->registproduct($request,$product);
+        $registproducts = $registProductModel->registproduct($request);
         return redirect()->route('list', compact('requestproducts'));
         }
 

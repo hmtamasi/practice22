@@ -8,7 +8,7 @@
         @csrf
         <div class="mb-3">
             <label for="product_name" class="form-label">商品名:</label>
-            <input id="product_name" type="text" name="product_name" class="form-control" required>
+            <input id="product_name" type="text" name="product_name" class="form-control" required placeholder="商品名を入力してください">
             @if($errors->has('product_name'))
                 <p>{{ $errors->first('product_name') }}</p>
             @endif

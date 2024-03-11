@@ -50,6 +50,7 @@
             <td>{{ $product->product_name }}</td>
             <td>{{ $product->price }}</td>
             <td>{{ $product->stock }}</td>
+            <td>{{ $product->company_id }}</td>
             <td><a href="{{ route('show',['id'=>$product->id]) }}" class="btn btn-primary">詳細</a></td>
             <td>
                 <form action="{{ route('destroy', ['id'=>$product->id]) }}" method="POST">

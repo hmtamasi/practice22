@@ -8,39 +8,23 @@ use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
-    use HasFactory;
+
     public function getProducts() {
         // productsテーブルからデータを取得
         $products = DB::table('products')->get();
         return $products;
     }
 
-    protected $table = 'products';
 
-    // テーブルに関連付ける主キー
-    protected $primaryKey = 'id';
-
-    // 登録・更新可能なカラムの指定
-    protected $fillable = [
-        'id',
-        'img_path',
-        'product_name',
-        'price',
-        'stock',
-        'company_id',
-        'comment'
-    ];
-
-    public function registproduct($products) {
+    public function registproduct($request,$product) {
         // 登録処理
         DB::table('products')->insert([
-            'id' => $products->id,
-            'img_path' => $products->img_path,
-            'product_name' => $products->product_name,
-            'price' => $products->price,
-            'stock' => $products->stock,
-            'company_id' => $products->company->company_id,
-            'comment' => $products->comment
+            'id' => $product->id,
+            'img_path' => $product->img_path,
+            'product_name' => $product->product_name,
+            'price' => $product->price,
+            'stock' => $product->stock,
+            'comment' => $product->comment
         ]);
     }
 
