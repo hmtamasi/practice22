@@ -22,24 +22,22 @@ class Product extends Model
 
     // 登録・更新可能なカラムの指定
     protected $fillable = [
-        'id',
         'img_path',
         'product_name',
         'price',
         'stock',
-        'company_id',
+        'company_name',
         'comment'
     ];
 
     public function registproduct($products) {
         // 登録処理
         DB::table('products')->insert([
-            'id' => $products->id,
             'img_path' => $products->img_path,
             'product_name' => $products->product_name,
             'price' => $products->price,
             'stock' => $products->stock,
-            'company_id' => $products->company->company_id,
+            'company_name' => $products->company_name,
             'comment' => $products->comment
         ]);
     }

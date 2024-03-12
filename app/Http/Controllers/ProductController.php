@@ -49,7 +49,7 @@ class ProductController extends Controller
         {
         $registProductModel = new Product();
         $registproducts = $registProductModel->registproduct($request);
-        return redirect()->route('list', compact('requestproducts'));
+        return redirect()->route('list', compact('registproducts'));
         }
 
     public function update(Request $request, Product $product)
