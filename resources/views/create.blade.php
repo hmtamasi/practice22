@@ -17,7 +17,7 @@
             <label for="company_name" class="form-label">メーカー</label>
             <select class="form-select" id="company_name" name="company_name">
             @foreach ($companies as $company)
-                <option value="{{ $company->company_id }}" {{ $company->company_name == $company->company_name ? 'selected' : '' }}>{{ $company->company_name }}</option>
+                <option value="{{ $company->id }}" {{ $company->company_name == $company->company_name ? 'selected' : '' }}>{{ $company->company_name }}</option>
             @endforeach
             </select>
             @if($errors->has('company_name'))

@@ -31,6 +31,7 @@ class Product extends Model
     ];
 
     public function registproduct($products) {
+        dd($products);
         // 登録処理
         DB::table('products')->insert([
             'img_path' => $products->img_path,
