@@ -15,9 +15,9 @@
         </div>
         <div class="mb-3">
             <label for="company_name" class="form-label">メーカー</label>
-            <select class="form-select" id="company_name" name="company_name">
+            <select class="form-select" id="company_name" name="company_id">
             @foreach ($companies as $company)
-                <option value="{{ $company->id }}" {{ $company->company_name == $company->company_name ? 'selected' : '' }}>{{ $company->company_name }}</option>
+                <option value="{{ $company->id }}" >{{ $company->company_name }}</option>
             @endforeach
             </select>
             @if($errors->has('company_name'))
@@ -48,7 +48,6 @@
             <input id="img_path" type="file" name="img_path" class="form-control">
         </div>
         <div class="button">
-        <button type="submit" onClick="history.forward()">新規登録</button>
         <button type="submit" class="btn btn-success">
                 {{ __('登録') }}
         </button>

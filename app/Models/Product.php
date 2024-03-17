@@ -26,20 +26,31 @@ class Product extends Model
         'product_name',
         'price',
         'stock',
-        'company_name',
+        'company_id',
         'comment'
     ];
 
     public function registproduct($products) {
-        dd($products);
         // 登録処理
         DB::table('products')->insert([
             'img_path' => $products->img_path,
             'product_name' => $products->product_name,
             'price' => $products->price,
             'stock' => $products->stock,
-            'company_name' => $products->company_name,
+            'company_id' => $products->company_id,
             'comment' => $products->comment
+        ]);
+    }
+
+    public function updateproduct($product) {
+        // 更新
+        DB::table('products')->update([
+            'img_path' => $product->img_path,
+            'product_name' => $product->product_name,
+            'price' => $product->price,
+            'stock' => $product->stock,
+            'company_id' => $product->company_id,
+            'comment' => $product->comment
         ]);
     }
 
