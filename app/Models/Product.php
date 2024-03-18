@@ -44,7 +44,7 @@ class Product extends Model
 
     public function updateproduct($product) {
         // 更新
-        DB::table('products')->update([
+        DB::table('products')->where('id', $product->id)->update([
             'img_path' => $product->img_path,
             'product_name' => $product->product_name,
             'price' => $product->price,

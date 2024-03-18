@@ -26,6 +26,7 @@ class ProductController extends Controller
         $query->where('product_name', 'LIKE', "%{$search}%");
     }
     $productsQuery = $query->paginate(10);
+
         return view('list', ['products' => $products,'companies' => $companies,'productsQuery' => $productsQuery]);
         }
         public function showCreate(Product $products){
@@ -54,7 +55,7 @@ class ProductController extends Controller
         $productFind = Product::find($id);
         return view('edit', compact('productFind'));
         }
-        public function store(Request $request,Product $products)
+        public function store(Request $request)
         {
         $registProductModel = new Product();
         $registproducts = $registProductModel->registproduct($request);
@@ -63,9 +64,10 @@ class ProductController extends Controller
 
         public function update(Request $request,Product $product,$id)
         {
-        $updateProductModel = new Product();
-        $registproducts = $updateProductModel->updateproduct($request);
-        return redirect()->route('list', compact('registproducts'));
+            
+        $updateProductModel = Product::find($id);
+        $updateproducts = $updateProductModel->updateproduct($request,);
+        return redirect()->route('list', compact('updateproducts'));
         }
         public function destroy($id)
         //(Product $product) 指定されたIDで商品をデータベースから自動的に検索し、その結果を $product に割り当てます。
@@ -74,7 +76,6 @@ class ProductController extends Controller
         $product = Product::find($id);
         // レコードを削除
         $product->delete();
-    
         // 全ての処理が終わったら、商品一覧画面に戻ります。
         return redirect('list');
         //URLの/productsを検索します

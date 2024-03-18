@@ -65,7 +65,7 @@ Route::get('/show/{id}', [App\Http\Controllers\ProductController::class, 'showSh
 
 Route::get('/edit/{id}', [App\Http\Controllers\ProductController::class, 'showEdit'])->name('edit');
 
-Route::put('/update/{id}', [App\Http\Controllers\ProductController::class, 'update'])->name('update');
+Route::PUT('/update/{id}', [App\Http\Controllers\ProductController::class, 'update'])->name('update');
 
 Route::POST('/destroy/{id}', [App\Http\Controllers\ProductController::class, 'destroy'])->name('destroy');
 
