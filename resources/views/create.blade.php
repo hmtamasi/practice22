@@ -16,6 +16,7 @@
         <div class="mb-3">
             <label for="company_name" class="form-label">メーカー</label>
             <select class="form-select" id="company_name" name="company_id">
+            <option value="">メーカー名</option>
             @foreach ($companies as $company)
                 <option value="{{ $company->id }}" >{{ $company->company_name }}</option>
             @endforeach

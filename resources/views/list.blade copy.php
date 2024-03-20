@@ -18,11 +18,10 @@
 <div class="links">
   <table>
         <form action="/search" method="get">
-            <input type="text" name="search" placeholder="キーワードを入力">
+            <input type="text" name="search" value="{{ request('search') }}" placeholder="キーワードを入力">
             <div class="mb-3">
             <label for="company_name" class="form-label">メーカー</label>
-            <select class="form-select" id="company_name" name="companyId">
-            <option value="">メーカー名</option>
+            <select class="form-select" id="company_name" name="company_id">
             @foreach ($companies as $company)
                 <option value="{{ $company->id }}" >{{ $company->company_name }}</option>
             @endforeach

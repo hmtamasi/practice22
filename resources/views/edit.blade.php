@@ -18,6 +18,7 @@
                             </div>
                             <label for="company_name" class="form-label">メーカー</label>
                                 <select class="form-select" id="company_name" name="company_id">
+                                <option value="">メーカー名</option>
                                         <option value="{{ $productFind->company->id }}" {{ $productFind->company->id == $productFind->company->id ? 'selected' : '' }}>{{ $productFind->company->company_name }}</option>
                                 </select>
                             </div>

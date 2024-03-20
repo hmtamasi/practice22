@@ -17,21 +17,58 @@ class ProductController extends Controller
         $products = $productModel->getProducts();
         $companyModel = new Company();
         $companies = $companyModel->getCompanies();
-    // Productモデルに基づいてクエリビルダを初期化
-    $query = Product::query();
-    // この行の後にクエリを逐次構築していきます。
-    // そして、最終的にそのクエリを実行するためのメソッド（例：get(), first(), paginate() など）を呼び出すことで、データベースに対してクエリを実行します。
-    // 商品名の検索キーワードがある場合、そのキーワードを含む商品をクエリに追加
-    if($search = $request->search){
-        $query->where(function ($query) use ($search) {
-        $query->where('product_name', 'LIKE', "%{$search}%")
-        ->orWhere('company_name', '=', $search);
-    });
-    }
-    $productsQuery = $query->get();
-        return view('list', ['products' => $products,'companies' => $companies,'productsQuery' => $productsQuery]);
+        return view('list', ['products' => $products,'companies' => $companies]);
         }
-        
+
+        public function show(Request $request)
+        {
+            //フォームを機能させるために各情報を取得し、viewに返す
+            $company = new Company();
+            $companies = $company->getList();
+            $search = $request->input('search');
+            $companyId = $request->input('companyId');
+            return view('searchproduct', [
+                'companies' => $companies,
+                'searchWord' => $search,
+                'companyId' => $companyId
+            ]);
+        }    
+        public function search(Request $request)
+        {
+            //入力される値nameの中身を定義する
+            $search = $request->input('search'); //商品名の値
+            $companyId = $request->input('companyId'); //カテゴリの値
+    
+            $query = Product::query();
+            //商品名が入力された場合、m_productsテーブルから一致する商品を$queryに代入
+            if (isset($search)) {
+                $query->where('product_name', 'like', '%' . self::escapeLike($search) . '%');
+            }
+            //カテゴリが選択された場合、m_categoriesテーブルからcategory_idが一致する商品を$queryに代入
+            if (isset($companyId)) {
+                $query->where('company_id', $companyId);
+            }
+    
+            //$queryをcategory_idの昇順に並び替えて$productsに代入
+            $products = $query->orderBy('company_id', 'asc')->paginate(15);
+    
+            //campanyテーブルからgetList();関数でcategory_nameとidを取得する
+            $company = new Company;
+            $companies = $company->getList();
+    
+            return view('searchproduct', [
+                'products' => $products,
+                'companies' => $companies,
+                'search' => $search,
+                'companyId' => $companyId
+            ]);
+        }
+        public static function escapeLike($str)
+        {
+            return str_replace(['\\', '%', '_'], ['\\\\', '\%', '\_'], $str);
+        }
+    
+
         public function showCreate(Product $products){
         // インスタンス生成
         $productModel = new Product();

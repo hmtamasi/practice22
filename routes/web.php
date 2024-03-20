@@ -59,6 +59,10 @@ Route::get('/companies', [ProductController::class, 'getCompanies']);
 
 Route::get('/list', [App\Http\Controllers\ProductController::class, 'showList'])->name('list');
 
+Route::get('/show', [App\Http\Controllers\ProductController::class, 'show'])->name('show');
+
+Route::get('/search', [App\Http\Controllers\ProductController::class, 'search'])->name('search');
+
 Route::get('/create', [App\Http\Controllers\ProductController::class, 'showCreate'])->name('create');
 
 Route::get('/show/{id}', [App\Http\Controllers\ProductController::class, 'showShow'])->name('show');
