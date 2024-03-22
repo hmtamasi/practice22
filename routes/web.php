@@ -51,17 +51,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/products', [ProductController::class, 'index']);
-
-Route::get('/products', [ProductController::class, 'getProducts']);
-
-Route::get('/companies', [ProductController::class, 'getCompanies']);
-
 Route::get('/list', [App\Http\Controllers\ProductController::class, 'showList'])->name('list');
-
-Route::get('/show', [App\Http\Controllers\ProductController::class, 'show'])->name('show');
-
-Route::get('/search', [App\Http\Controllers\ProductController::class, 'search'])->name('search');
 
 Route::get('/create', [App\Http\Controllers\ProductController::class, 'showCreate'])->name('create');
 

@@ -22,15 +22,14 @@ class ProductController extends Controller
     // この行の後にクエリを逐次構築していきます。
     // そして、最終的にそのクエリを実行するためのメソッド（例：get(), first(), paginate() など）を呼び出すことで、データベースに対してクエリを実行します。
     // 商品名の検索キーワードがある場合、そのキーワードを含む商品をクエリに追加
-    if($search = $request->search){
-        $query->where(function ($query) use ($search) {
+    $search = $request->input('search');
+    if(!empty($search)){//$search　が空ではない場合、検索処理を実行します
         $query->where('product_name', 'LIKE', "%{$search}%")
-        ->orWhere('company_name', '=', $search);
-    });
+        ->get();
     }
-    $productsQuery = $query->get();
-        return view('list', ['products' => $products,'companies' => $companies,'productsQuery' => $productsQuery]);
-        }
+    $productsQuery = $query->paginate(5);
+    return view('list', ['products' => $products,'companies' => $companies,'productsQuery' => $productsQuery]);
+}
         
         public function showCreate(Product $products){
         // インスタンス生成

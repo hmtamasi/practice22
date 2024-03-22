@@ -17,20 +17,25 @@
 
 <div class="links">
   <table>
-        <form action="/search" method="get">
-            <input type="text" name="search" placeholder="キーワードを入力">
-            <div class="mb-3">
-            <label for="company_name" class="form-label">メーカー</label>
-            <select class="form-select" id="company_name" name="companyId">
-            <option value="">メーカー名</option>
-            @foreach ($companies as $company)
-                <option value="{{ $company->id }}" >{{ $company->company_name }}</option>
-            @endforeach
-            </select>
+     <div class="search mt-5">
+        <form action="{{ route('list') }}" method="GET" class="row g-3">
+            <div class="col-sm-12 col-md-3">
+                <input type="text" name="search" class="form-control" placeholder="検索キーワード" value="{{ request('search') }}">
             </div>
-        <button type="submit" class="btn btn-primary">検索</button>
+             <div class="mb-3">
+                <label for="company_name" class="form-label">メーカー</label>
+                <select class="form-select" id="company_name" name="companyId">
+                    <option value="">メーカー名</option>
+                    @foreach ($companies as $company)
+                        <option value="{{ $company->id }}" >{{ $company->company_name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-sm-12 col-md-1">
+                <button class="btn btn-outline-secondary" type="submit">検索</button>
+            </div>
         </form>
-
+     </div>
      <thead>
         <tr>
             <th>ID</th>
