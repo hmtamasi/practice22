@@ -17,7 +17,7 @@
                                 <input type="text" class="form-control" id="product_name" name="product_name" value="{{ $productFind->product_name }}" required>
                             </div>
                             <label for="company_name" class="form-label">メーカー</label>
-                                <select class="form-select" id="company_name" name="company_id">
+                                <select class="form-select" id="company_name" name="company_id" required>
                                 <option value="">メーカー名</option>
                                         <option value="{{ $productFind->company->id }}" {{ $productFind->company->id == $productFind->company->id ? 'selected' : '' }}>{{ $productFind->company->company_name }}</option>
                                 </select>
