@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
+    
     public function showList(Request $request){
         // インスタンス生成
         $productModel = new Product();
