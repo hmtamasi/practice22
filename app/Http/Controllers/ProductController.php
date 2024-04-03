@@ -32,7 +32,7 @@ class ProductController extends Controller
         return view('list', compact('products', 'companies', 'productSearch','companySearch'));
         }
         
-        public function showCreate(Product $products){
+    public function showCreate(Product $products){
         // インスタンス生成
         $productModel = new Product();
         $products = $productModel->getProducts();
@@ -40,7 +40,7 @@ class ProductController extends Controller
         $companies = $companyModel->getCompanies();
         return view('create', ['products' => $products,'companies' => $companies]);
         }
-        public function showShow($id) {
+    public function showShow($id) {
         // インスタンス生成
         $productModel = new Product();
         $products = $productModel->getProducts();
@@ -49,7 +49,7 @@ class ProductController extends Controller
         $productFind = Product::find($id);
         return view('show', compact('productFind'));
         }
-        public function showEdit($id) {
+    public function showEdit($id) {
         // インスタンス生成
         $productModel = new Product();
         $products = $productModel->getProducts();
@@ -58,9 +58,8 @@ class ProductController extends Controller
         $productFind = Product::find($id);
         return view('edit', compact('productFind'));
         }
-        public function store(Request $request)
+    public function store(Request $request)
         {
-            dd($request);
         $registProductModel = new Product();
         $registproducts = $registProductModel->registproduct($request);
         // 画像が送られたら
@@ -74,13 +73,13 @@ class ProductController extends Controller
         return redirect()->route('list', compact('registproducts'));
         }
 
-        public function update(Request $request,Product $product,$id)
+    public function update(Request $request,Product $product,$id)
         {
         $updateProductModel = Product::find($id);
         $updateproducts = $updateProductModel->updateproduct($request,);
         return redirect()->route('list', compact('updateproducts'));
         }
-        public function destroy($id)
+    public function destroy($id)
         //(Product $product) 指定されたIDで商品をデータベースから自動的に検索し、その結果を $product に割り当てます。
         {
         // Booksテーブルから指定のIDのレコード1件を取得
