@@ -64,8 +64,6 @@ Route::POST('/destroy/{id}', [App\Http\Controllers\ProductController::class, 'de
 
 Route::post('/store',[App\Http\Controllers\ProductController::class, 'store'])->name('store');
 
-Route::post('/regist',[App\Http\Controllers\ProductController::class, 'registSubmit'])->name('regist');
-
 Route::get('hello', 'HelloController@index');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

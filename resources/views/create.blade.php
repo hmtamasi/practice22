@@ -47,12 +47,13 @@
         <div class="mb-3">
             <label for="img_path" class="form-label">商品画像:</label>
             <input id="img_path" type="file" name="img_path" class="form-control">
+            dd("img_path");
         </div>
         <div class="button">
         <button type="submit" class="btn btn-success">
                 {{ __('登録') }}
         </button>
-        <button type="button" onClick="history.back()">戻る</button>
+            <button type="button" onClick="history.back()">戻る</button>
         </div>
     </form>
 
