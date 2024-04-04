@@ -16,6 +16,7 @@
             @endif
 
 <div class="links">
+<h1 class="mb-4">商品一覧画面</h1>
   <table>
      <div class="search mt-5">
         <form action="{{ route('list') }}" method="GET" class="row g-3">
@@ -52,7 +53,9 @@
     @foreach ($products as $product)
         <tr>
             <td>{{ $product->id }}</td>
-            <td>{{ $product->img_path }}</td>
+            <td classz="table-img">
+                <img src="{{ asset($product->img_path) }}" >
+            </td>
             <td>{{ $product->product_name }}</td>
             <td>{{ $product->price }}</td>
             <td>{{ $product->stock }}</td>
