@@ -60,6 +60,7 @@ class ProductController extends Controller
         }
     public function store(Request $request)
         {
+        // 登録処理
         $registProductModel = new Product();
         $registproducts = $registProductModel->registproduct($request);
         // 画像が送られたら
@@ -69,7 +70,20 @@ class ProductController extends Controller
         $dir = 'img';
         // imgディレクトリを作成し画像を保存
         // storage/app/public/任意のディレクトリ名/
-        $request->file('img_path')->store('public/' . $dir);
+        // $request->file('img_path')->store('public/' . $dir);
+        $request->file('img_path')->store('storage/'.$dir);
+         dd($request);    //ここでデバッグをかけてみる
+
+        DB::beginTransaction();
+        try {
+            // 登録処理呼び出し
+            $model = new Product();
+            $model->registProduct($request);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return back();
+        }
         return redirect()->route('list', compact('registproducts'));
         }
 
@@ -77,8 +91,28 @@ class ProductController extends Controller
         {
         $updateProductModel = Product::find($id);
         $updateproducts = $updateProductModel->updateproduct($request,);
+        // 画像が送られたら
+        // ファイルをストレージ保存する
+        // $img=$request->img_path->store('画像');  //formで設置したname名
+        // ディレクトリ名を任意の名前で設定します
+        $dir = 'img';
+        // imgディレクトリを作成し画像を保存
+        // storage/app/public/任意のディレクトリ名/
+        // $request->file('img_path')->store('public/' . $dir);
+        $request->file('img_path')->update($dir);
+        DB::beginTransaction();
+        try {
+            // 登録処理呼び出し
+            $model = new Product();
+            $model->registProduct($request);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return back();
+        }
         return redirect()->route('list', compact('updateproducts'));
         }
+
     public function destroy($id)
         //(Product $product) 指定されたIDで商品をデータベースから自動的に検索し、その結果を $product に割り当てます。
         {
@@ -86,6 +120,16 @@ class ProductController extends Controller
         $product = Product::find($id);
         // レコードを削除
         $product->delete();
+        DB::beginTransaction();
+        try {
+            // 登録処理呼び出し
+            $model = new Product();
+            $model->registProduct($id);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return back();
+        }
         // 全ての処理が終わったら、商品一覧画面に戻ります。
         return redirect('list');
         //URLの/productsを検索します
