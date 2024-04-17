@@ -30,10 +30,10 @@ class Product extends Model
         'comment'
     ];
 
-    public function registproduct($products) {
+    public function registproduct($products, $path) {
         // 登録処理
         DB::table('products')->insert([
-            'img_path' => $products->img_path,
+            'img_path' => $path,
             'product_name' => $products->product_name,
             'price' => $products->price,
             'stock' => $products->stock,

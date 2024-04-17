@@ -24,7 +24,7 @@
         <dd class="col-sm-9">{{ $productFind->comment }}</dd>
 
         <dt class="col-sm-3">商品画像</dt>
-        <dd class="col-sm-9"><img src="{{ asset($productFind->img_path) }}" width="300"></dd>
+        <dd class="col-sm-9"><img src="{{ asset('storage/'.$productFind->img_path) }}" width="300" ></dd>
 
         <a href="{{ route('edit', $productFind->id) }}" class="btn btn-primary">編集</a>
         <button type="button" onClick="history.back()">戻る</button>

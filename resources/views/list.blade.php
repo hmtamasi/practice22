@@ -54,7 +54,7 @@
         <tr>
             <td>{{ $product->id }}</td>
             <td classz="table-img">
-                <img src="{{ asset($product->img_path) }}" width="30" >
+                <img src="{{ asset('storage/'.$product->img_path) }}" width="30" >
             </td>
             <td>{{ $product->product_name }}</td>
             <td>{{ $product->price }}</td>

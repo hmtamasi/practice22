@@ -61,30 +61,47 @@ class ProductController extends Controller
     public function store(Request $request)
         {
         // 登録処理
-        $registProductModel = new Product();
-        $registproducts = $registProductModel->registproduct($request);
+        // $registProductModel = new Product();
+        // $registproducts = $registProductModel->registproduct($request);
         // 画像が送られたら
         // ファイルをストレージ保存する
         // $img=$request->img_path->store('画像');  //formで設置したname名
         // ディレクトリ名を任意の名前で設定します
-        $dir = 'img';
+        // $dir = 'img';
         // imgディレクトリを作成し画像を保存
         // storage/app/public/任意のディレクトリ名/
         // $request->file('img_path')->store('public/' . $dir);
-        $request->file('img_path')->store('storage/'.$dir);
-         dd($request);    //ここでデバッグをかけてみる
+        // $request->file('img_path')->store('storage/'.$dir);
+        // dd($request);    //ここでデバッグをかけてみる
+        // DB::beginTransaction();
+        // try {
+            // 登録処理呼び出し
+        //    $model = new Product();
+        //    $model->registProduct($request);
+        //    DB::commit();
+        //} catch (\Exception $e) {
+        //    DB::rollback();
+        //    return back();
+        //}
+        // return redirect()->route('list', compact('registproducts'));
+        // }
 
         DB::beginTransaction();
         try {
             // 登録処理呼び出し
             $model = new Product();
-            $model->registProduct($request);
+            $dir = 'img';
+            $img = $request->file('img_path');
+            $path = $img->store($dir,'public');
+
+
+            $model->registProduct($request, $path);
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
             return back();
         }
-        return redirect()->route('list', compact('registproducts'));
+        return redirect()->route('list');
         }
 
     public function update(Request $request,Product $product,$id)
