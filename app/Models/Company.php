@@ -10,7 +10,7 @@ class Company extends Model
 {
 
     public function getCompanies() {
-        // productsテーブルからデータを取得
+        // companiesテーブルからデータを取得
         $companies = DB::table('companies')->get();
         return $companies;
     }
