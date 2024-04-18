@@ -16,10 +16,8 @@ class Product extends Model
     }
 
     protected $table = 'products';
-
     // テーブルに関連付ける主キー
     protected $primaryKey = 'id';
-
     // 登録・更新可能なカラムの指定
     protected $fillable = [
         'img_path',
@@ -34,6 +32,7 @@ class Product extends Model
         // 登録処理
         DB::table('products')->insert([
             'img_path' => $path,
+            //'img_path' => $products->img_path,
             'product_name' => $products->product_name,
             'price' => $products->price,
             'stock' => $products->stock,
@@ -42,10 +41,11 @@ class Product extends Model
         ]);
     }
 
-    public function updateproduct($product) {
+    public function updateproduct($product, $path) {
         // 更新
         DB::table('products')->where('id', $product->id)->update([
-            'img_path' => $product->img_path,
+            'img_path' => $path,
+            //'img_path' => $product->img_path,
             'product_name' => $product->product_name,
             'price' => $product->price,
             'stock' => $product->stock,
