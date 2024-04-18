@@ -167,3 +167,5 @@ class ProductController extends Controller
         // ⑥ products　/がなくても検索できます
         }
     }
+
+    
