@@ -10,15 +10,15 @@ class Product extends Model
 {
     use HasFactory;
     public function getProducts() {
-        // productsテーブルからデータを取得
         $products = DB::table('products')->get();
         return $products;
     }
+    // ① LaravelのEloquent ORMを使用してデータベースから製品データを取得するためのメソッドの例
+    // ② productsテーブルからデータを取得
+    // →DBファサードのtableメソッドを使用してproductsテーブルに対するクエリを開始し、getメソッドを使用してクエリの結果を取得
 
     protected $table = 'products';
-    // テーブルに関連付ける主キー
     protected $primaryKey = 'id';
-    // 登録・更新可能なカラムの指定
     protected $fillable = [
         'img_path',
         'product_name',
@@ -27,6 +27,10 @@ class Product extends Model
         'company_id',
         'comment'
     ];
+    // $tableプロパティを使用してテーブル名を指定する
+    // テーブルに関連付ける主キー
+    // 登録・更新可能なカラムの指定
+
 
     public function registproduct($products, $path) {
         DB::table('products')->insert([
@@ -67,15 +71,16 @@ class Product extends Model
     // →'img_path' => $products->img_path,これだと画像表示はされなかった
     }
 
-    // Productモデルがsalesテーブルとリレーション関係を結ぶ為のメソッドです
     public function sales()
     {
         return $this->hasMany(Sale::class);
     }
+    // Productモデルがsalesテーブルとリレーション関係を結ぶ為のメソッドです（１対多）
 
-    // Productモデルがcompanysテーブルとリレーション関係を結ぶ為のメソッドです
     public function company()
     {
         return $this->belongsTo(Company::class);
     }
+    // Productモデルがcompanysテーブルとリレーション関係を結ぶ為のメソッドです（多対１）
+
 }

@@ -93,7 +93,7 @@ class ProductController extends Controller
         // ② データベーストランザクションの開始
         // ③ Productモデルのインスタンスを作成
         // ④ 画像を保存するディレクトリ名を指定
-        // ⑤ リクエストから画像ファイルを取得　
+        // ⑤ リクエストから画像ファイルを取得
         // ⑥ 画像を指定したディレクトリに保存し、パスを取得
         // ⑦ ProductモデルのregistProductメソッドを呼び出し、リクエストと画像パスを引数に渡す
         // ⑧ トランザクションをコミット（成功した場合）トランザクションをロールバック（エラーが発生した場合） 前のページに戻る
@@ -113,21 +113,19 @@ class ProductController extends Controller
     public function update(Request $request,Product $product,$id){
         DB::beginTransaction();
         try {
-            $model = Product::find($id); //更新したい製品を検索
-            if ($request->hasFile('img_path')) { // 画像が更新された場合
+            $model = Product::find($id);
+            if ($request->hasFile('img_path')) { 
                 $dir = 'img';
                 $img = $request->file('img_path');
                 $path = $img->store($dir, 'public');
-                $model->img_path = $path; // 画像パスを更新
+                $model->img_path = $path;
             }
-            // その他のフィールドを更新
             $model->product_name = $request->input('product_name');
             $model->price = $request->input('price');
             $model->stock = $request->input('stock');
             $model->company_id = $request->input('company_id');
             $model->comment = $request->input('comment');
-            // その他のフィールドをここに追加
-            $model->save(); // モデルを保存
+            $model->save(); 
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
@@ -139,6 +137,13 @@ class ProductController extends Controller
         // →指定されたIDで商品をデータベースから自動的に検索し、その結果を $product に割り当てます。
         // ② データベーストランザクションの開始
         // ③ Productテーブルから指定のIDのレコード1件を取得 (更新したい製品を検索)
+        // ④ if〜 画像が更新された場合
+        // ⑤  画像を保存するディレクトリ名を指定
+        // ⑥ リクエストから画像ファイルを取得
+        // ⑦ 画像を指定したディレクトリに保存し、パスを取得
+        // ⑧ 画像パスを更新
+        // ⑨ その他のフィールドを更新
+        // ⑩ モデルを保存
         }   
 
         //public function update(Request $request,Product $product,$id){

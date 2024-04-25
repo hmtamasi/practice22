@@ -24,17 +24,18 @@ Route::get('/', function () {
 });
 
 Route::get('/', function () {
-    // ウェブサイトのホームページ（'/'のURL）にアクセスした場合のルートです
     if (Auth::check()) {
-        // ログイン状態ならば
         return redirect()->route('list');
-        // 商品一覧ページ（ProductControllerのindexメソッドが処理）へリダイレクトします
     } else {
-        // ログイン状態でなければ
         return redirect()->route('login');
-        //　ログイン画面へリダイレクトします
     }
 });
+    // ① ウェブサイトのホームページ（'/'のURL）にアクセスした場合のルートです
+    // ② ログイン状態ならば
+    // →商品一覧ページ（ProductControllerのindexメソッドが処理）へリダイレクトします
+    // ③ ログイン状態でなければ
+    // →ログイン画面へリダイレクトします
+
 
 Auth::routes();
 // Auth::routes();はLaravelが提供している便利な機能で
